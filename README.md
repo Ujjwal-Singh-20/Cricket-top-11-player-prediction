@@ -20,7 +20,7 @@ How to Run
 
 2. Install the required Python packages:
     <br>
-   ```pip install flask requests scikit-learn joblib pandas python-dotenv```
+   ```pip install flask requests scikit-learn joblib pandas python-dotenv googlesearch-python beautifulsoup4```
 
 3. Ensure the cricket API server is running locally <br>
     STEPS:<br>
