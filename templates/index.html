@@ -1,0 +1,93 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cricket Top 11 Predictor</title>
+    <style>
+        body{ 
+            font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; 
+        }
+        .container{ 
+            background: #ff9d79; padding: 20px; border-radius: 10px; 
+        }
+        .container h1{
+            color: #7b2a0c;
+            text-align: center;
+        }
+        .container-2{ 
+            background: #79ffd2; padding: 20px; border-radius: 10px; 
+        }
+        .container-2 h2 {
+            color: #115240;
+            text-align: center;
+        }
+        table{ 
+            width: 100%; border-collapse: collapse; margin-top: 20px; 
+        }
+        th, td{ 
+            padding: 10px; text-align: left; border-bottom: 1px solid #ddd; 
+        }
+        th{ 
+            background-color: #2196F3; color: white; 
+        }
+        form{ 
+            margin-bottom: 20px; 
+        }
+        input{ 
+            padding: 8px; width: 70%; 
+        }
+        button{ 
+            padding: 8px 16px; background: #5184bc; color: white; border: none; border-radius: 4px; cursor: pointer; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏏 Cricket Top 11 Predictor</h1>
+        <form method="POST">
+            <input type="text" name="players" placeholder="Enter player names (comma-separated)" required>
+            <button type="submit">Predict Top 11</button>
+        </form>
+        
+        {% if players %}
+        <table>
+            <tr>
+                <th>Player</th>
+                <th>Predicted Score</th>
+            </tr>
+            {% for player in players %}
+            <tr>
+                <td>{{ player.name }}</td>
+                <td>{{ player.score }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+    <div class="container-2">
+        <p>
+        <h2>
+            How Is the Score Calculated?
+        </h2> <br>
+        score = (<br>
+            features['t20_avg'] * 0.5 +<br>
+            features['t20_sr'] * 0.3 +<br>
+            features['t20_wickets'] * 2 +<br>
+            features['centuries'] * 1<br>
+        )
+            <br><br>
+        t20_avg: Batting average in T20 matches
+            <br>
+        t20_sr: Batting strike rate in T20 matches
+            <br>
+        t20_wickets: Wickets taken in T20 matches
+            <br>
+        centuries: Total hundreds scored (T20, ODI, Test combined)
+            <br><br>
+        Weights:
+            <br>
+        The weights (0.5, 0.3, 2, 1) are custom factors, reflecting how much each stat matters for the model.
+    </p>
+</div>
+</body>
+</html>
